@@ -17,19 +17,11 @@ class AllSelect extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
-      value: this.props.value || [],               // 选中的value数组
-=======
       value: this.props.value || props.defaultValue || [],               // 选中的value数组
->>>>>>> feature/add_antd_feature
       options: props.children || [],               // option选项
       getAllSelectValue: props.onChange,           // 获得value值
       style: props.style || {},                    // style
       placeholder: props.placeholder || '',        // placeholder
-<<<<<<< HEAD
-      showSearch: props.showSearch || true,        // 是否可以输入值搜索
-      allowClear: props.allowClear || true,        // 是否展示删除按钮
-=======
 
       showSearch: props.showSearch || true,        // 是否可以输入值搜索
       allowClear: props.allowClear || true,        // 是否展示删除按钮
@@ -39,26 +31,17 @@ class AllSelect extends React.Component {
       notFoundContent: props.notFoundContent || 'Not Found',
       filterOption: props.filterOption || true,
       onSearch: props.onSearch,
-
->>>>>>> feature/add_antd_feature
     };
   }
 
   componentWillReceiveProps = (nextProps) => {
     this.setState({
-<<<<<<< HEAD
-      value: nextProps.value || [],
-=======
       value: nextProps.value || nextProps.defaultValue || [],
->>>>>>> feature/add_antd_feature
+
       options: nextProps.children || [],
       getAllSelectValue: nextProps.onChange,
       style: nextProps.style || {},
       placeholder: nextProps.placeholder || '',
-<<<<<<< HEAD
-      showSearch: nextProps.showSearch || true,        // 是否可以输入值搜索
-      allowClear: nextProps.allowClear || true,        // 是否展示删除按钮
-=======
 
       showSearch: nextProps.showSearch || true,
       allowClear: nextProps.allowClear || true,
@@ -68,7 +51,6 @@ class AllSelect extends React.Component {
       notFoundContent: nextProps.notFoundContent || 'Not Found',
       filterOption: nextProps.filterOption || true,
       onSearch: nextProps.onSearch
->>>>>>> feature/add_antd_feature
     });
   }
 
@@ -132,13 +114,10 @@ class AllSelect extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
-    const { options, style, value, placeholder, defaultValue, allowClear, showSearch } = this.state;
-=======
     const { options, style, value, placeholder, defaultValue, allowClear, showSearch, defaultActiveFirstOption,
       disabled, labelInValue, notFoundContent, filterOption
      } = this.state;
->>>>>>> feature/add_antd_feature
+
     return (
       <Select
         className="maxHeight"               // 限制高度不超过四行选项的class类
