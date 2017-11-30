@@ -1,11 +1,11 @@
 /*
 全选组件参数说名:
 onChange: 表单值的回调函数 (value) => {this.setState({data:value})}
-data: 控制选中的数据 this.state.data
+value: 控制选中的数据 this.state.data
 placeholder: placeholder
 style: style
 注意：
-表单方法form.getFieldsValue()获取值可用，form.resetFields()重置，设置值等方法不可用，要用传入data的state状态控制
+不在表单内使用该组件，一定要双向绑定value,组件不支持defaultValue属性，普通组件要使用请用value模拟，表单则使用initial属性
 */
 
 import React from 'react';
@@ -16,27 +16,26 @@ const Option = Select.Option;
 class AllSelect extends React.Component {
   constructor(props) {
     super(props);
-    console.log('this.props.value',this.props.value);
     this.state = {
-      defaultValue: this.props.defaultValue || [],
       value: this.props.value || [],               // 选中的value数组
       options: props.children || [],               // option选项
       getAllSelectValue: props.onChange,           // 获得value值
       style: props.style || {},                    // style
       placeholder: props.placeholder || '',        // placeholder
+      showSearch: props.showSearch || true,        // 是否可以输入值搜索
+      allowClear: props.allowClear || true,        // 是否展示删除按钮
     };
   }
 
   componentWillReceiveProps = (nextProps) => {
-    console.log('nextProps.value',nextProps.value);
-
     this.setState({
-      defaultValue: nextProps.defaultValue || [],
       value: nextProps.value || [],
       options: nextProps.children || [],
       getAllSelectValue: nextProps.onChange,
       style: nextProps.style || {},
       placeholder: nextProps.placeholder || '',
+      showSearch: nextProps.showSearch || true,        // 是否可以输入值搜索
+      allowClear: nextProps.allowClear || true,        // 是否展示删除按钮
     });
   }
 
@@ -65,9 +64,6 @@ class AllSelect extends React.Component {
         for (let i = 1; i < options.length; i++) {
           store.push(options[i]['props']['value']);
         }
-        console.log('handleChange',{
-          value: store,
-        });
 
         this.setState({
           value: store,
@@ -96,17 +92,15 @@ class AllSelect extends React.Component {
   }
 
   render() {
-    const { options, style, value, placeholder, defaultValue } = this.state;
-    console.log('render', this.state.value);
+    const { options, style, value, placeholder, defaultValue, allowClear, showSearch } = this.state;
     return (
       <Select
-        defaultValue={defaultValue}
-        className="maxHeight"               // 限制高度不超过四行选项的class类
-        showSearch                          // 可以输入值搜索
+        className="maxHeight"              // 限制高度不超过四行选项的class类
+        showSearch={showSearch}             // 可以输入值搜索
         optionFilterProp="children"         // 搜索内容在option范围内
         style={style}
         mode="multiple"
-        allowClear                          // 允许清除选项
+        allowClear={allowClear}             // 允许清除选项
         value={value}
         onChange={this.handleChange}
         placeholder={placeholder}
